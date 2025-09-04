@@ -1,18 +1,14 @@
-data_paths:
-  raw: data/raw/
-  processed: data/processed/
-  external: data/external/
-
-output_paths:
-  maps: outputs/maps/
-  reports: outputs/reports/
-  models: outputs/models/
-
 project_settings:
-  default_crs: EPSG:4326
-  coordinate_precision: 6
-  date_format: "%Y-%m-%d"
+  default_crs: "EPSG:4326"
+  data_path: "data/raw"
+  output_path: "outputs"
 
-api_keys:
-  mapbox_token: ${MAPBOX_TOKEN}
-  google_maps_key: ${GOOGLE_MAPS_KEY}
+data_processing:
+  buffer_distance: 100
+  simplify_tolerance: 0.01
+
+visualization:
+  map_style: "open-street-map"
+  color_scale: "Viridis"
+  default_width: 1000
+  default_height: 600

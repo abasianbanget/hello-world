@@ -1,32 +1,63 @@
-# File: src/data_ingestion.py
-import pandas as pd
-import geopandas as gpd
-import pyarrow as pa
-import pyarrow.parquet as pq
-import os
 import yaml
-from dotenv import load_dotenv
+import os
+import geopandas as gpd
+import pandas as pd
 
-load_dotenv()
-
-def load_config():
-    with open('config/config.yaml', 'r') as f:
-        return yaml.safe_load(f)
-
-def read_csv_with_pandas(file_path):
-    """Membaca file CSV menggunakan pandas"""
-    return pd.read_csv(file_path)
+def load_config(config_path='config/config.yaml'):
+    """
+    Load configuration from YAML file
+    
+    Parameters:
+    config_path (str): Path to the configuration file
+    
+    Returns:
+    dict: Configuration data
+    """
+    try:
+        with open(config_path, 'r') as file:
+            config = yaml.safe_load(file)
+        return config
+    except Exception as e:
+        print(f"Error loading configuration: {e}")
+        # Return default config if file not found
+        return {
+            'project_settings': {
+                'default_crs': 'EPSG:4326'
+            }
+        }
 
 def read_shapefile(file_path):
-    """Membaca shapefile menggunakan geopandas"""
-    return gpd.read_file(file_path)
+    """
+    Read a shapefile using GeoPandas
+    
+    Parameters:
+    file_path (str): Path to the shapefile
+    
+    Returns:
+    geopandas.GeoDataFrame: Data from the shapefile
+    """
+    try:
+        gdf = gpd.read_file(file_path)
+        print(f"Successfully read shapefile: {file_path}")
+        return gdf
+    except Exception as e:
+        print(f"Error reading shapefile: {e}")
+        return None
 
-def save_as_parquet(df, file_path):
-    """Menyimpan DataFrame sebagai file Parquet"""
-    table = pa.Table.from_pandas(df)
-    pq.write_table(table, file_path)
-
-def load_parquet(file_path):
-    """Memuat file Parquet sebagai pandas DataFrame"""
-    table = pq.read_table(file_path)
-    return table.to_pandas()
+def read_csv_with_pandas(file_path):
+    """
+    Read CSV file using pandas
+    
+    Parameters:
+    file_path (str): Path to the CSV file
+    
+    Returns:
+    pandas.DataFrame: Data from CSV file
+    """
+    try:
+        df = pd.read_csv(file_path)
+        print(f"Successfully read CSV file: {file_path}")
+        return df
+    except Exception as e:
+        print(f"Error reading CSV file: {e}")
+        return None
