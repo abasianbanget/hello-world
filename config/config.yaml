@@ -1,0 +1,17 @@
+data_paths:
+  raw: ../data/raw/
+  processed: ../data/processed/
+  external: ../data/external/
+
+output_paths:
+  maps: ../outputs/maps/
+  reports: ../outputs/reports/
+  models: ../outputs/models/
+
+api_keys:
+  # Contoh: jika menggunakan API tertentu, masukkan di sini
+  # mapbox_token: YOUR_MAPBOX_TOKEN
+
+parameters:
+  # Parameter proyek, seperti CRS yang digunakan
+  default_crs: EPSG:4326
