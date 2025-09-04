@@ -1,17 +1,18 @@
 data_paths:
-  raw: ../data/raw/
-  processed: ../data/processed/
-  external: ../data/external/
+  raw: data/raw/
+  processed: data/processed/
+  external: data/external/
 
 output_paths:
-  maps: ../outputs/maps/
-  reports: ../outputs/reports/
-  models: ../outputs/models/
+  maps: outputs/maps/
+  reports: outputs/reports/
+  models: outputs/models/
+
+project_settings:
+  default_crs: EPSG:4326
+  coordinate_precision: 6
+  date_format: "%Y-%m-%d"
 
 api_keys:
-  # Contoh: jika menggunakan API tertentu, masukkan di sini
-  # mapbox_token: YOUR_MAPBOX_TOKEN
-
-parameters:
-  # Parameter proyek, seperti CRS yang digunakan
-  default_crs: EPSG:4326
+  mapbox_token: ${MAPBOX_TOKEN}
+  google_maps_key: ${GOOGLE_MAPS_KEY}
